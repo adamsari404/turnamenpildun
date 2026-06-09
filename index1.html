@@ -502,44 +502,34 @@
                 return;
             }
 
-            let foundCount = 0;
-            let htmlContent = ''; // Variabel untuk menampung semua hasil pencarian
-
+            let found = false;
             rows.forEach((row, index) => {
                 if(index === 0) return; 
                 
                 const rank = row[0] || '-';
                 const user = row[1] || '-';
-                const turnover = formatRupiah(row[2]); // Menggunakan formatRupiah dari langkah sebelumnya
+                const turnover = formatRupiah(row[2]) || '-';
 
-                // LOGIKA BARU: Menggunakan .includes() untuk pencarian sebagian (Partial Match)
-                if(user.toString().toLowerCase().includes(username)){
-                    foundCount++;
-                    
-                    // Akumulasi HTML. Ditambahkan garis putus-putus pembatas antar user
-                    htmlContent += `
-                        <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
-                            <div class="result-item">
-                                <span class="result-label">Ranking</span>
-                                <span class="result-value rank">#${rank}</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">Username</span>
-                                <span class="result-value">${user}</span>
-                            </div>
-                            <div class="result-item" style="border-bottom: none;">
-                                <span class="result-label">Turnover</span>
-                                <span class="result-value turnover">${turnover}</span>
-                            </div>
+                if(user.toString().toLowerCase() === username){
+                    found = true;
+                    renderResult(resultBox, `
+                        <div class="result-item">
+                            <span class="result-label">Ranking</span>
+                            <span class="result-value rank">#${rank}</span>
                         </div>
-                    `;
+                        <div class="result-item">
+                            <span class="result-label">Username</span>
+                            <span class="result-value">${user}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Turnover</span>
+                            <span class="result-value turnover">${turnover}</span>
+                        </div>
+                    `, themeClass);
                 }
             });
 
-            // Tampilkan semua hasil atau pesan error jika tidak ada yang cocok
-            if(foundCount > 0){
-                renderResult(resultBox, htmlContent, themeClass);
-            } else {
+            if(!found){
                 renderResult(resultBox, `<span class="warning-text">⚠️ Username tidak ditemukan.</span>`);
             }
         } catch(error) {
@@ -571,47 +561,39 @@
                 return;
             }
 
-            let foundCount = 0;
-            let htmlContent = ''; // Variabel penampung
-
+            let found = false;
             rows.forEach((row, index) => {
                 if(index === 0) return; 
 
                 const rank = row[0] || '-';
                 const sheetUserId = (row[1] || '').toString().toLowerCase();
                 const sheetName = (row[2] || '').toString().toLowerCase();
-                const turnover = formatRupiah(row[3]);
+                const turnover = formatRupiah(row[3]) || '-';
 
-                // LOGIKA BARU: Keduanya menggunakan .includes() agar tidak perlu exact match
-                if(sheetUserId.includes(userId) && sheetName.includes(nameData)){
-                    foundCount++;
-                    
-                    htmlContent += `
-                        <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
-                            <div class="result-item">
-                                <span class="result-label">Ranking</span>
-                                <span class="result-value rank">#${rank}</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">User ID</span>
-                                <span class="result-value">${row[1]}</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">Nama</span>
-                                <span class="result-value">${row[2]}</span>
-                            </div>
-                            <div class="result-item" style="border-bottom: none;">
-                                <span class="result-label">Turnover</span>
-                                <span class="result-value turnover">${turnover}</span>
-                            </div>
+                if(sheetUserId === userId && sheetName === nameData){
+                    found = true;
+                    renderResult(resultBox, `
+                        <div class="result-item">
+                            <span class="result-label">Ranking</span>
+                            <span class="result-value rank">#${rank}</span>
                         </div>
-                    `;
+                        <div class="result-item">
+                            <span class="result-label">User ID</span>
+                            <span class="result-value">${row[1]}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Nama</span>
+                            <span class="result-value">${row[2]}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Turnover</span>
+                            <span class="result-value turnover">${turnover}</span>
+                        </div>
+                    `, 'success-agent');
                 }
             });
 
-            if(foundCount > 0){
-                renderResult(resultBox, htmlContent, 'success-agent');
-            } else {
+            if(!found){
                 renderResult(resultBox, `<span class="warning-text">⚠️ Data tidak cocok. Periksa kembali inputan Anda.</span>`);
             }
         } catch(error) {
