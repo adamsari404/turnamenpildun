@@ -474,7 +474,7 @@
                 
                 const rank = row[0] || '-';
                 const user = row[1] || '-';
-                const turnover = row[2] || '-';
+                const turnover = formatRupiah(row[2]) || '-';
 
                 if(user.toString().toLowerCase() === username){
                     found = true;
@@ -534,7 +534,7 @@
                 const rank = row[0] || '-';
                 const sheetUserId = (row[1] || '').toString().toLowerCase();
                 const sheetName = (row[2] || '').toString().toLowerCase();
-                const turnover = row[3] || '-';
+                const turnover = formatRupiah(row[3]) || '-';
 
                 if(sheetUserId === userId && sheetName === nameData){
                     found = true;
@@ -656,6 +656,25 @@
         document.getElementById('box-pools-prag').style.display = (fSitus !== 'PLAY303' && fProvider !== 'PG SOFT') ? 'block' : 'none';
         document.getElementById('box-play-pg').style.display = (fSitus !== 'POOLS303' && fProvider !== 'PRAGMATIC') ? 'block' : 'none';
         document.getElementById('box-play-prag').style.display = (fSitus !== 'POOLS303' && fProvider !== 'PG SOFT') ? 'block' : 'none';
+    }
+
+    // Helper function to format IDR
+    function formatRupiah(value) {
+        if (!value || value === '-') return '-';
+        
+        // Bersihkan data dari karakter selain angka (antisipasi format bawaan Google Sheets)
+        const cleanNumber = parseFloat(value.toString().replace(/[^0-9.-]+/g, ""));
+        
+        // Jika setelah dibersihkan hasilnya bukan angka (NaN), kembalikan teks aslinya
+        if (isNaN(cleanNumber)) return value;
+
+        // Gunakan standar internasional untuk format mata uang Indonesia
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(cleanNumber);
     }
 </script>
 
