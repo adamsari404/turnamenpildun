@@ -425,6 +425,40 @@
 
 </div>
 
+<style>
+  #btnMusic {
+    position: fixed;
+    z-index: 9999;
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    bottom: 85px; 
+    left: 15px;
+  }
+
+  @media (min-width: 768px) {
+    #btnMusic {
+      bottom: 30px; 
+      left: 70px;   
+    }
+  }
+</style>
+
+<audio id="bgMusic" loop>
+  <source src="https://project303.pages.dev/assets/music1.mp3" type="audio/mpeg">
+</audio>
+
+<button id="btnMusic">🔇</button>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function showSection(section){
@@ -676,6 +710,27 @@
             maximumFractionDigits: 0
         }).format(cleanNumber);
     }
+
+     var bgMusic = document.getElementById("bgMusic");
+    var btnMusic = document.getElementById("btnMusic");
+    var isPlaying = false; 
+
+    function toggleMusic() {
+        if (isPlaying) {
+        bgMusic.pause(); 
+        btnMusic.innerHTML = "🔇"; 
+        isPlaying = false;
+        } else {
+        bgMusic.play(); 
+        btnMusic.innerHTML = "🔊"; 
+        isPlaying = true;
+        }
+    }
+
+    btnMusic.addEventListener("click", function(event) {
+        toggleMusic();
+        event.stopPropagation();
+    });
 </script>
 
 </body>
