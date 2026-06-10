@@ -9,13 +9,13 @@
     <style>
         /* --- General Styles --- */
         body {
-            background-color: #0f0f11;
+            background-color: #0f0f11; /* Slightly darker background */
             color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .container-box {
-            max-width: 900px;
+            max-width: 900px; /* Slightly narrower for better readability */
             margin: auto;
             padding: 30px 20px;
         }
@@ -24,7 +24,7 @@
             text-align: center;
             font-size: 22px;
             font-weight: 800;
-            color: #ffd700;
+            color: #ffd700; /* Gold */
             margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -42,6 +42,7 @@
         .carousel-item img {
             width: 100%;
             height: auto;
+            /* aspect-ratio: 21 / 9; Wider aspect ratio */
             object-fit: cover;
         }
 
@@ -51,10 +52,13 @@
             color: #111;
             font-weight: 800;
             border: none;
-            border-radius: 8px;
+            border-radius: 8px; /* Less rounded, more modern */
             padding: 16px 30px;
             font-size: 18px;
             transition: all 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
             box-shadow: 0 4px 15px rgba(255, 179, 0, 0.4);
             letter-spacing: 1px;
         }
@@ -191,7 +195,7 @@
             padding: 20px;
             background: #25252b;
             border-radius: 8px;
-            border-left: 4px solid #444;
+            border-left: 4px solid #444; /* Default border */
             display: none;
         }
         
@@ -217,6 +221,97 @@
         .result-value.rank { color: #ffd700; }
         .result-value.turnover { color: #28a745; }
 
+        /* --- History Section --- */
+        .history-section {
+            background: #1e1e24;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-top: 50px;
+            border: 1px solid #2a2a35;
+        }
+
+        .history-title {
+            color: #ffd700;
+            text-align: center;
+            font-weight: 800;
+            margin-bottom: 30px;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* History Filters */
+        .filter-label {
+            background-color: #2a2a35;
+            color: #aaa;
+            border: 1px solid #444;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .filter-select {
+            background-color: #1e1e24;
+            color: #fff;
+            border: 1px solid #444;
+        }
+        .filter-select:focus {
+            border-color: #ffd700;
+            box-shadow: none;
+        }
+
+        /* History Cards */
+        .history-grid-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .history-card {
+            background: #25252b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .history-card:hover {
+            background: #2a2a35;
+            transform: translateX(4px);
+        }
+
+        .history-card.theme-pg { border-left: 4px solid #4da6ff; }
+        .history-card.theme-prag { border-left: 4px solid #ffd700; }
+
+        .history-info h5 {
+            margin: 0 0 4px 0;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .history-info p {
+            margin: 0;
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .history-prize {
+            font-size: 15px;
+            font-weight: 800;
+            color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        
         .loading-text { color: #aaa; font-style: italic; }
         .error-text { color: #1732ca; }
         .warning-text { color: #ffd700; }
@@ -258,30 +353,21 @@
         </button>
     </div>
 
-    <div class="text-center mt-4 d-flex flex-column align-items-center gap-3">
-        <div class="dropdown w-100" style="max-width: 400px;">
-            <button class="btn main-dropdown-btn dropdown-toggle w-100" type="button" id="dropdownEvent" data-bs-toggle="dropdown" aria-expanded="false">
+    <!-- Dropdown Menu -->
+    <div class="text-center mt-4">
+        <div class="dropdown">
+            <button class="btn main-dropdown-btn dropdown-toggle" type="button" id="dropdownEvent" data-bs-toggle="dropdown" aria-expanded="false">
                 EVENT PIALA DUNIA 2026
             </button>
-            <ul class="dropdown-menu w-100" aria-labelledby="dropdownEvent">
+            <ul class="dropdown-menu w-100" style="max-width: 400px; margin: 0 auto;" aria-labelledby="dropdownEvent">
                 <li><a class="dropdown-item agent-link" href="#" onclick="showSection('agent')">AGENT303</a></li>
                 <li><a class="dropdown-item play-link" href="#" onclick="showSection('play')">PLAY303</a></li>
                 <li><a class="dropdown-item pools-link" href="#" onclick="showSection('pools')">POOLS303</a></li>
             </ul>
         </div>
-
-        <div class="dropdown w-100" style="max-width: 400px;">
-            <button class="btn main-dropdown-btn dropdown-toggle w-100" type="button" id="dropdownReferal" data-bs-toggle="dropdown" aria-expanded="false">
-                CHECK TO REFERAL
-            </button>
-            <ul class="dropdown-menu w-100" aria-labelledby="dropdownReferal">
-                <li><a class="dropdown-item agent-link" href="#" onclick="showSection('ref-agent')">AGENT303</a></li>
-                <li><a class="dropdown-item play-link" href="#" onclick="showSection('ref-play')">PLAY303</a></li>
-                <li><a class="dropdown-item pools-link" href="#" onclick="showSection('ref-pools')">POOLS303</a></li>
-            </ul>
-        </div>
     </div>
 
+    <!-- SECTION AGENT303 -->
     <div id="agent-section" class="search-section">
         <h2 class="section-header header-agent">AGENT303</h2>
         <div class="row justify-content-center">
@@ -303,6 +389,7 @@
         </div>
     </div>
 
+    <!-- SECTION PLAY303 -->
     <div id="play-section" class="search-section">
         <h2 class="section-header header-play">PLAY303</h2>
         <div class="row justify-content-center">
@@ -319,6 +406,7 @@
         </div>
     </div>
 
+    <!-- SECTION POOLS303 -->
     <div id="pools-section" class="search-section">
         <h2 class="section-header header-pools">POOLS303</h2>
         <div class="row justify-content-center">
@@ -334,59 +422,6 @@
             </div>
         </div>
     </div>    
-
-    <div id="ref-agent-section" class="search-section">
-        <h2 class="section-header header-agent">REF AGENT303</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="search-box box-agent">
-                    <h4 class="text-agent text-center mb-4" style="color: #2f5de4;">Cek TO Referal</h4>
-                    <div class="mb-3">
-                        <label class="input-label">ID REF</label>
-                        <input type="text" id="ref-agent-id-input" class="form-control" placeholder="Masukkan ID Referal Anda">
-                    </div>
-                    <div class="mb-4">
-                        <label class="input-label">Nama Terdaftar</label>
-                        <input type="text" id="ref-agent-name-input" class="form-control" placeholder="Masukkan Nama Anda">
-                    </div>
-                    <button class="btn btn-search w-100" style="--bs-btn-hover-color: #3a8ff1; background: #2f5de4; color: white;" onclick="searchReferralAgent()">Cari Data Referal</button>
-                    <div id="ref-agent-result" class="result-box success-agent"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="ref-play-section" class="search-section">
-        <h2 class="section-header header-play">REF PLAY303</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="search-box box-pg">
-                    <h4 class="text-pg">Cek TO Referal</h4>
-                    <div class="input-group">
-                        <input type="text" id="ref-play-input" class="form-control" placeholder="Masukkan ID REF">
-                        <button class="btn btn-primary fw-bold" onclick="searchReferral('REF PLAY303', 'ref-play-input', 'ref-play-result', 'success-pg')">Cari</button>
-                    </div>
-                    <div id="ref-play-result" class="result-box"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="ref-pools-section" class="search-section">
-        <h2 class="section-header header-pools">REF POOLS303</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="search-box box-pragmatic">
-                    <h4 class="text-pragmatic" style="color:#ffd700;">Cek TO Referal</h4>
-                    <div class="input-group">
-                        <input type="text" id="ref-pools-input" class="form-control" placeholder="Masukkan ID REF">
-                        <button class="btn btn-warning fw-bold text-dark" onclick="searchReferral('REF POOLS303', 'ref-pools-input', 'ref-pools-result', 'success-prag')">Cari</button>
-                    </div>
-                    <div id="ref-pools-result" class="result-box"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
 
@@ -426,45 +461,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // --- 1. Fungsi Toggle Tampilan ---
     function showSection(section){
-        // Daftar semua ID section (Klasemen + Referal)
-        const sections = ['pools', 'play', 'agent', 'ref-pools', 'ref-play', 'ref-agent'];
+        document.getElementById('pools-section').style.display='none';
+        document.getElementById('play-section').style.display='none';
+        document.getElementById('agent-section').style.display='none';
         
-        // Sembunyikan semua
-        sections.forEach(s => {
-            const el = document.getElementById(s + '-section');
-            if(el) el.style.display = 'none';
-        });
-        
-        // Tampilkan yang dipilih
         const target = document.getElementById(section + '-section');
-        if(target) {
-            target.style.display = 'block';
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        target.style.display='block';
+        // Simple scroll to section
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // --- 2. Helper Functions ---
+    // Helper function to render results consistently
     function renderResult(resultBox, htmlContent, themeClass = '') {
         resultBox.style.display = 'block';
         resultBox.className = 'result-box ' + themeClass;
         resultBox.innerHTML = htmlContent;
     }
 
-    function formatRupiah(value) {
-        if (!value || value === '-') return '-';
-        const cleanNumber = parseFloat(value.toString().replace(/[^0-9.-]+/g, ""));
-        if (isNaN(cleanNumber)) return value;
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(cleanNumber);
-    }
-
-    // --- 3. Fungsi Pencarian Klasemen Event ---
     async function searchData(sheetName, inputId, resultId, themeClass) {
         const username = document.getElementById(inputId).value.trim().toLowerCase();
         const resultBox = document.getElementById(resultId);
@@ -489,17 +503,20 @@
             }
 
             let foundCount = 0;
-            let htmlContent = ''; 
+            let htmlContent = ''; // Variabel untuk menampung semua hasil pencarian
 
             rows.forEach((row, index) => {
                 if(index === 0) return; 
                 
                 const rank = row[0] || '-';
                 const user = row[1] || '-';
-                const turnover = formatRupiah(row[2]); 
+                const turnover = formatRupiah(row[2]); // Menggunakan formatRupiah dari langkah sebelumnya
 
+                // LOGIKA BARU: Menggunakan .includes() untuk pencarian sebagian (Partial Match)
                 if(user.toString().toLowerCase().includes(username)){
                     foundCount++;
+                    
+                    // Akumulasi HTML. Ditambahkan garis putus-putus pembatas antar user
                     htmlContent += `
                         <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
                             <div class="result-item">
@@ -519,6 +536,7 @@
                 }
             });
 
+            // Tampilkan semua hasil atau pesan error jika tidak ada yang cocok
             if(foundCount > 0){
                 renderResult(resultBox, htmlContent, themeClass);
             } else {
@@ -554,7 +572,7 @@
             }
 
             let foundCount = 0;
-            let htmlContent = ''; 
+            let htmlContent = ''; // Variabel penampung
 
             rows.forEach((row, index) => {
                 if(index === 0) return; 
@@ -564,8 +582,10 @@
                 const sheetName = (row[2] || '').toString().toLowerCase();
                 const turnover = formatRupiah(row[3]);
 
+                // LOGIKA BARU: Keduanya menggunakan .includes() agar tidak perlu exact match
                 if(sheetUserId.includes(userId) && sheetName.includes(nameData)){
                     foundCount++;
+                    
                     htmlContent += `
                         <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
                             <div class="result-item">
@@ -575,10 +595,6 @@
                             <div class="result-item">
                                 <span class="result-label">User ID</span>
                                 <span class="result-value">${row[1]}</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">Nama</span>
-                                <span class="result-value">${row[2]}</span>
                             </div>
                             <div class="result-item" style="border-bottom: none;">
                                 <span class="result-label">Turnover</span>
@@ -599,153 +615,129 @@
         }
     }
 
-    // --- 4. Fungsi Pencarian Referal ---
-    async function searchReferralAgent() {
-        const userId = document.getElementById('ref-agent-id-input').value.trim().toLowerCase();
-        const nameData = document.getElementById('ref-agent-name-input').value.trim().toLowerCase();
-        const resultBox = document.getElementById('ref-agent-result');
+    /* History Logic */
+    let cachedHistoryData = [];
 
-        if(!userId || !nameData){
-            renderResult(resultBox, `<span class="error-text">⚠️ Harap isi ID REF dan Nama lengkap!</span>`);
-            return;
+    async function initHistoryData() {
+        const statusBox = document.getElementById('history-status');
+        const btnLoad = document.getElementById('btn-load-history');
+        const filterBox = document.getElementById('history-filters');
+
+        if(btnLoad) {
+            btnLoad.disabled = true;
+            btnLoad.innerHTML = 'Memuat Data...';
         }
 
-        renderResult(resultBox, `<span class="loading-text">Memverifikasi data referal... ⏳</span>`);
+        statusBox.innerHTML = `<span class="loading-text">Menyinkronkan data history...</span>`;
 
         try {
-            const response = await fetch(`/api/search?sheet=REF AGENT303`);
-            if (!response.ok) throw new Error(`Server Error`);
-            
-            const data = await response.json();
-            const rows = data.values;
-
-            if(data.error || !rows){
-                renderResult(resultBox, `<span class="error-text">❌ Data belum tersedia.</span>`);
-                return;
-            }
-
-            let foundCount = 0;
-            let htmlContent = '';
-
-            rows.forEach((row, index) => {
-                if(index === 0) return; // Lewati baris header
-
-                // --- UPDATE INDEKS KOLOM DISINI ---
-                // row[0] = No. (Diabaikan)
-                // row[1] = ID REF
-                // row[2] = Name
-                // row[3] = Referal
-
-                const sheetIdRef = (row[1] || '').toString().toLowerCase();
-                const sheetName = (row[2] || '').toString().toLowerCase();
-                const toRef = formatRupiah(row[3]);
-
-                if(sheetIdRef.includes(userId) && sheetName.includes(nameData)){
-                    foundCount++;
-                    htmlContent += `
-                        <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
-                            <div class="result-item">
-                                <span class="result-label">ID REF</span>
-                                <span class="result-value">${row[1]}</span> </div>
-                            <div class="result-item">
-                                <span class="result-label">Nama Terdaftar</span>
-                                <span class="result-value">${row[2]}</span> </div>
-                            <div class="result-item" style="border-bottom: none;">
-                                <span class="result-label">TOTAL TO REF</span>
-                                <span class="result-value turnover">${toRef}</span>
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            if(foundCount > 0){
-                renderResult(resultBox, htmlContent, 'success-agent');
-            } else {
-                renderResult(resultBox, `<span class="warning-text">⚠️ Data referal tidak ditemukan.</span>`);
-            }
-        } catch(error) {
-            renderResult(resultBox, `<span class="error-text">Terjadi kesalahan sistem.</span>`);
-        }
-    }
-
-    async function searchReferral(sheetName, inputId, resultId, themeClass) {
-        const idRef = document.getElementById(inputId).value.trim().toLowerCase();
-        const resultBox = document.getElementById(resultId);
-
-        if(!idRef){
-            renderResult(resultBox, `<span class="error-text">⚠️ Silakan masukkan ID REF.</span>`);
-            return;
-        }
-
-        renderResult(resultBox, `<span class="loading-text">Sedang mencari data referal... ⏳</span>`);
-
-        try {
-            const response = await fetch(`/api/search?sheet=${encodeURIComponent(sheetName)}`);
+            const response = await fetch(`/api/history`);
             if (!response.ok) throw new Error();
-            
             const data = await response.json();
-            const rows = data.values;
-
-            if(data.error || !rows){
-                renderResult(resultBox, `<span class="error-text">❌ Data tidak tersedia.</span>`);
+            
+            if (!data.values || data.values.length <= 1) {
+                statusBox.innerHTML = `<span class="warning-text">Belum ada riwayat tercatat.</span>`;
+                if(btnLoad) {
+                    btnLoad.disabled = false;
+                    btnLoad.innerHTML = 'Coba Lagi';
+                }
                 return;
             }
 
-            let foundCount = 0;
-            let htmlContent = '';
+            cachedHistoryData = data.values.slice(1);
+            statusBox.innerHTML = ''; 
 
-            rows.forEach((row, index) => {
-                if(index === 0) return; // Lewati baris header
-                
-                // --- UPDATE INDEKS KOLOM DISINI ---
-                // row[0] = No. (Diabaikan)
-                // row[1] = ID REF
-                // row[2] = Referal
+            if(btnLoad) document.getElementById('history-action-container').style.display = 'none';
+            if(filterBox) filterBox.style.display = 'flex';
 
-                const sheetIdRef = (row[1] || '').toString().toLowerCase();
-                const toRef = formatRupiah(row[2]);
+            renderHistory();
 
-                if(sheetIdRef.includes(idRef)){
-                    foundCount++;
-                    htmlContent += `
-                        <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
-                            <div class="result-item">
-                                <span class="result-label">ID REF</span>
-                                <span class="result-value">${row[1]}</span> </div>
-                            <div class="result-item" style="border-bottom: none;">
-                                <span class="result-label">TOTAL TO REF</span>
-                                <span class="result-value turnover">${toRef}</span>
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            if(foundCount > 0){
-                renderResult(resultBox, htmlContent, themeClass);
-            } else {
-                renderResult(resultBox, `<span class="warning-text">⚠️ ID REF tidak ditemukan.</span>`);
+        } catch (error) {
+            statusBox.innerHTML = `<span class="error-text">Gagal memuat riwayat.</span>`;
+            if(btnLoad) {
+                btnLoad.disabled = false;
+                btnLoad.innerHTML = 'Coba Muat Ulang';
             }
-        } catch(error) {
-            renderResult(resultBox, `<span class="error-text">Koneksi gagal. Coba lagi nanti.</span>`);
         }
     }
 
-    // --- 5. Fungsi Audio ---
-    var bgMusic = document.getElementById("bgMusic");
+    function renderHistory() {
+        const fBulan = document.getElementById('filterBulan').value;
+        const fSitus = document.getElementById('filterSitus').value;
+        const fProvider = document.getElementById('filterProvider').value;
+
+        let poolsPgData = [], poolsPragData = [], playPgData = [], playPragData = [];
+
+        cachedHistoryData.forEach(row => {
+            const [bulan, situs, provider, ranking, username, hadiah] = row;
+            const sBulan = (bulan || '').trim();
+            const sSitus = (situs || '').trim().toUpperCase();
+            const sProvider = (provider || '').trim().toUpperCase();
+
+            if (sBulan === fBulan && (fSitus === 'SEMUA' || sSitus === fSitus) && (fProvider === 'SEMUA' || sProvider === fProvider)) {
+                if (sSitus === 'POOLS303' && sProvider === 'PG SOFT') poolsPgData.push(row);
+                if (sSitus === 'POOLS303' && sProvider === 'PRAGMATIC') poolsPragData.push(row);
+                if (sSitus === 'PLAY303' && sProvider === 'PG SOFT') playPgData.push(row);
+                if (sSitus === 'PLAY303' && sProvider === 'PRAGMATIC') playPragData.push(row);
+            }
+        });
+
+        const buildHTML = (dataArray, themeClass) => {
+            if (dataArray.length === 0) return `<p class="loading-text text-center mt-3">Tidak ada data.</p>`;
+            return dataArray.slice(0, 10).map(row => `
+                <div class="history-card ${themeClass}">
+                    <div class="history-info">
+                        <h5>#${row[3]} - ${row[4]}</h5>
+                        <p>${row[1]} • ${row[2]}</p>
+                    </div>
+                    <div class="history-prize">${row[5]}</div>
+                </div>
+            `).join('');
+        };
+
+        document.getElementById('data-pools-pg').innerHTML = buildHTML(poolsPgData, 'theme-pg');
+        document.getElementById('data-pools-prag').innerHTML = buildHTML(poolsPragData, 'theme-prag');
+        document.getElementById('data-play-pg').innerHTML = buildHTML(playPgData, 'theme-pg');
+        document.getElementById('data-play-prag').innerHTML = buildHTML(playPragData, 'theme-prag');
+
+        document.getElementById('box-pools-pg').style.display = (fSitus !== 'PLAY303' && fProvider !== 'PRAGMATIC') ? 'block' : 'none';
+        document.getElementById('box-pools-prag').style.display = (fSitus !== 'PLAY303' && fProvider !== 'PG SOFT') ? 'block' : 'none';
+        document.getElementById('box-play-pg').style.display = (fSitus !== 'POOLS303' && fProvider !== 'PRAGMATIC') ? 'block' : 'none';
+        document.getElementById('box-play-prag').style.display = (fSitus !== 'POOLS303' && fProvider !== 'PG SOFT') ? 'block' : 'none';
+    }
+
+    // Helper function to format IDR
+    function formatRupiah(value) {
+        if (!value || value === '-') return '-';
+        
+        // Bersihkan data dari karakter selain angka (antisipasi format bawaan Google Sheets)
+        const cleanNumber = parseFloat(value.toString().replace(/[^0-9.-]+/g, ""));
+        
+        // Jika setelah dibersihkan hasilnya bukan angka (NaN), kembalikan teks aslinya
+        if (isNaN(cleanNumber)) return value;
+
+        // Gunakan standar internasional untuk format mata uang Indonesia
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(cleanNumber);
+    }
+
+     var bgMusic = document.getElementById("bgMusic");
     var btnMusic = document.getElementById("btnMusic");
     var isPlaying = false; 
 
     function toggleMusic() {
         if (isPlaying) {
-            bgMusic.pause(); 
-            btnMusic.innerHTML = "🔇"; 
-            isPlaying = false;
+        bgMusic.pause(); 
+        btnMusic.innerHTML = "🔇"; 
+        isPlaying = false;
         } else {
-            bgMusic.play(); 
-            btnMusic.innerHTML = "🔊"; 
-            isPlaying = true;
+        bgMusic.play(); 
+        btnMusic.innerHTML = "🔊"; 
+        isPlaying = true;
         }
     }
 
