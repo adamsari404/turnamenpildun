@@ -667,7 +667,17 @@
                 }
             });
 
+            // Tampilkan hasil pencarian
             if(foundCount > 0){
+                // --- KODE TAMBAHAN: NOTE JADWAL PEMBAGIAN BONUS ---
+                htmlContent += `
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #444; text-align: center;">
+                        <span style="font-size: 13px; color: #ffd700; font-style: italic;">
+                            Note: Bonus Ajak Teman akan dibagikan tanggal 22 Juli 2026
+                        </span>
+                    </div>
+                `;
+                
                 renderResult(resultBox, htmlContent, 'success-agent');
             } else {
                 renderResult(resultBox, `<span class="warning-text">⚠️ Data referal tidak ditemukan.</span>`);
@@ -740,7 +750,17 @@
                 }
             });
 
+            // Tampilkan hasil pencarian
             if(foundCount > 0){
+                // --- KODE TAMBAHAN: NOTE JADWAL PEMBAGIAN BONUS ---
+                htmlContent += `
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #444; text-align: center;">
+                        <span style="font-size: 13px; color: #ffd700; font-style: italic;">
+                            Note: Bonus Ajak Teman akan dibagikan tanggal 22 Juli 2026
+                        </span>
+                    </div>
+                `;
+                
                 renderResult(resultBox, htmlContent, themeClass);
             } else {
                 renderResult(resultBox, `<span class="warning-text">⚠️ ID REF tidak ditemukan.</span>`);
