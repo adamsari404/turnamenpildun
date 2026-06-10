@@ -630,29 +630,37 @@
             rows.forEach((row, index) => {
                 if(index === 0) return; // Lewati baris header
 
-                // --- UPDATE INDEKS KOLOM DISINI ---
-                // row[0] = No. (Diabaikan)
-                // row[1] = ID REF
-                // row[2] = Name
-                // row[3] = Referal
+                // --- PEMETAAN KOLOM TERBARU ---
+                // row[0] = ID REF
+                // row[1] = NAMA (Hanya untuk verifikasi pencarian, tidak ditampilkan)
+                // row[2] = Turnover Referal
+                // row[3] = Bonus Ajak Teman
 
-                const sheetIdRef = (row[1] || '').toString().toLowerCase();
-                const sheetName = (row[2] || '').toString().toLowerCase();
-                const toRef = row[3];
+                const sheetIdRef = (row[0] || '').toString().toLowerCase();
+                const sheetName = (row[1] || '').toString().toLowerCase();
+                
+                // Format angka menjadi Rupiah
+                const toRef = formatRupiah(row[2]);
+                const bonus = formatRupiah(row[3]);
 
+                // Pencarian tetap menggunakan Nama dan ID REF
                 if(sheetIdRef.includes(userId) && sheetName.includes(nameData)){
                     foundCount++;
+                    
+                    // Tampilan output yang direvisi (Nama dihilangkan, Bonus ditambahkan)
                     htmlContent += `
                         <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
                             <div class="result-item">
                                 <span class="result-label">ID REF</span>
-                                <span class="result-value">${row[1]}</span> </div>
+                                <span class="result-value">${row[0]}</span>
+                            </div>
                             <div class="result-item">
-                                <span class="result-label">Nama Terdaftar</span>
-                                <span class="result-value">${row[2]}</span> </div>
-                            <div class="result-item" style="border-bottom: none;">
-                                <span class="result-label">TOTAL REFERRAL</span>
+                                <span class="result-label">Turnover Referal</span>
                                 <span class="result-value turnover">${toRef}</span>
+                            </div>
+                            <div class="result-item" style="border-bottom: none;">
+                                <span class="result-label">Bonus Ajak Teman</span>
+                                <span class="result-value" style="color: #ffd700; font-weight: 800;">${bonus}</span>
                             </div>
                         </div>
                     `;
@@ -698,24 +706,34 @@
             rows.forEach((row, index) => {
                 if(index === 0) return; // Lewati baris header
                 
-                // --- UPDATE INDEKS KOLOM DISINI ---
-                // row[0] = No. (Diabaikan)
-                // row[1] = ID REF
-                // row[2] = Referal
+                // --- PEMETAAN KOLOM TERBARU ---
+                // row[0] = ID REF
+                // row[1] = Turnover Referal
+                // row[2] = Bonus Ajak Teman
 
-                const sheetIdRef = (row[1] || '').toString().toLowerCase();
-                const toRef = row[2];
+                const sheetIdRef = (row[0] || '').toString().toLowerCase();
+                
+                // Format angka menjadi Rupiah
+                const toRef = formatRupiah(row[1]);
+                const bonus = formatRupiah(row[2]);
 
                 if(sheetIdRef.includes(idRef)){
                     foundCount++;
+                    
+                    // Tampilan output yang direvisi (Bonus ditambahkan)
                     htmlContent += `
                         <div style="border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px;">
                             <div class="result-item">
                                 <span class="result-label">ID REF</span>
-                                <span class="result-value">${row[1]}</span> </div>
-                            <div class="result-item" style="border-bottom: none;">
-                                <span class="result-label">TOTAL REFERRAL</span>
+                                <span class="result-value">${row[0]}</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Turnover Referal</span>
                                 <span class="result-value turnover">${toRef}</span>
+                            </div>
+                            <div class="result-item" style="border-bottom: none;">
+                                <span class="result-label">Bonus Ajak Teman</span>
+                                <span class="result-value" style="color: #ffd700; font-weight: 800;">${bonus}</span>
                             </div>
                         </div>
                     `;
